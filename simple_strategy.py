@@ -43,16 +43,14 @@ def update_sma(price):
 def simple_signal(price, sma):
     if sma is None:
         return "hold"
-    if price > sma * 1.001:   # slight buffer
+    if price > sma * 1.001:
         return "long"
     elif price < sma * 0.999:
         return "short"
     return "hold"
 
 def calculate_size(price, equity=1000):
-    """Dummy equity for dry-run. Replace with real balance later."""
     risk_amount = equity * MAX_POSITION_PCT
-    # Rough size in USD terms
     size_usd = risk_amount * MAX_LEVERAGE
     size_btc = size_usd / price
     return round(size_usd, 2), round(size_btc, 6)
@@ -70,7 +68,6 @@ def main():
             price = get_ticker()
             sma = update_sma(price)
             signal = simple_signal(price, sma)
-
             size_usd, size_btc = calculate_size(price)
 
             sma_str = f"{sma:.1f}" if sma else "building..."
