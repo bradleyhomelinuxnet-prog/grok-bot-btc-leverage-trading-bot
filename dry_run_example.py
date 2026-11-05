@@ -27,11 +27,7 @@ exchange.load_markets()
 ticker = exchange.fetch_ticker(symbol)
 print(f"Ticker {symbol}: last={ticker['last']}")
 
-if private_key and wallet_address:
-    balance = exchange.fetch_balance()
-    print("Balance:", balance.get("USDC", {}))
-else:
-    print("No credentials set — skipping private endpoints (dry-run safe)")
+print("Skipping balance check for now (public data works)")
 
 print("\nDry-run complete. No orders placed.")
 print("Next: implement strategy logic with hard risk limits before any live trading.")
